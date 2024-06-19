@@ -13,7 +13,7 @@ async function getItemsAPI(items) {
   ];
   for (let i = 0; i < categories.length; i++) {
     let response = await fetch(
-      `https://fakestoreapi.com/products/category/${categories[i]}?limit=5`
+      `https://fakestoreapi.com/products/category/${categories[i]}?limit=10`
     );
     if (!response.ok) {
       console.log(response.Error);
