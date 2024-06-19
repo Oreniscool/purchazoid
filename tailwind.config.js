@@ -3,7 +3,11 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      scale: {
+        25: '0.25',
+      },
       colors: {
+        filter: 'hsla(299, 0%, 22%, 0.5)',
         text: {
           50: '#07120c',
           100: '#0e2517',

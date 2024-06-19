@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 import Category from './Category.jsx';
+import ProductSegment from './ProductSegment.jsx';
+//import fakeItem from './fakeItem.js';
 
 async function getItemsAPI(items) {
   const categories = [
@@ -32,7 +34,24 @@ function ShopItems() {
   });
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [focusedItem, setFocusedItem] = useState(null);
+  const [cart, setCart] = useState(
+    window.sessionStorage.getItem('cart')
+      ? JSON.parse(window.sessionStorage.getItem('cart'))
+      : []
+  );
 
+  function addToCart(item, amount) {
+    if (cart.find((ele) => ele.id == item.id) !== undefined) {
+      let element = cart.find((ele) => ele.id == item.id);
+      element.amount += amount;
+      setCart((cart) => [...cart]);
+      return;
+    }
+    let tempItem = { ...item };
+    tempItem.amount = amount;
+    setCart((cart) => [...cart, tempItem]);
+  }
   //Effect to get items
   useEffect(() => {
     async function getItems() {
@@ -49,10 +68,11 @@ function ShopItems() {
     getItems();
   }, []);
 
-  //Effect to print updated items
+  //Effect to update session storage on cart update
   useEffect(() => {
-    console.log(items);
-  }, [items]);
+    console.log(cart);
+    window.sessionStorage.setItem('cart', JSON.stringify(cart));
+  }, [cart]);
 
   if (error) {
     return <div>An error occurred check your connection!</div>;
@@ -67,19 +87,35 @@ function ShopItems() {
 
   return (
     <div className="h-full m-16 flex flex-col gap-20">
+      {focusedItem ? (
+        <ProductSegment
+          itemInfo={focusedItem}
+          handleClick={setFocusedItem}
+          addToCart={addToCart}
+        ></ProductSegment>
+      ) : (
+        ''
+      )}
       <Category
         categoryName={"men's clothing"}
         items={items["men's clothing"]}
+        handleClick={setFocusedItem}
       ></Category>
       <Category
         categoryName={"women's clothing"}
         items={items["women's clothing"]}
+        handleClick={setFocusedItem}
       ></Category>
       <Category
         categoryName={'electronics'}
         items={items.electronics}
+        handleClick={setFocusedItem}
       ></Category>
-      <Category categoryName={'jewelery'} items={items.jewelery}></Category>
+      <Category
+        categoryName={'jewelery'}
+        items={items.jewelery}
+        handleClick={setFocusedItem}
+      ></Category>
     </div>
   );
 }
