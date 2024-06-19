@@ -1,6 +1,9 @@
 /* eslint-disable react/prop-types */
 
 import Item from './Item';
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
 function Items({ items, handleClick }) {
   return (
     <div className="flex w-full justify-start gap-10">
@@ -19,7 +22,7 @@ function Items({ items, handleClick }) {
 function Category({ categoryName, items, handleClick }) {
   return (
     <div className="flex flex-col justify-center items-start gap-4">
-      <h2 className="text-xl">{categoryName}</h2>
+      <h2 className="text-xl">{capitalizeFirstLetter(categoryName)}</h2>
       <hr className="border-2 border-secondary-300 w-full" />
       <Items items={items} handleClick={handleClick}></Items>
     </div>

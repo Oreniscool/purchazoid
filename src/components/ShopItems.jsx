@@ -86,7 +86,7 @@ function ShopItems() {
   }
 
   return (
-    <div className="h-full m-16 flex flex-col gap-20">
+    <div className="h-full flex flex-col gap-20 px-20 py-20 overflow-y-scroll ">
       {focusedItem ? (
         <ProductSegment
           itemInfo={focusedItem}

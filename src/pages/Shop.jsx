@@ -1,3 +1,4 @@
+import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import ShopItems from '../components/ShopItems';
 function Shop() {
@@ -5,6 +6,7 @@ function Shop() {
     <>
       <Navbar></Navbar>
       <ShopItems></ShopItems>
+      <Footer></Footer>
     </>
   );
 }

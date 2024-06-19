@@ -13,7 +13,11 @@ function Product({ itemInfo, handleClick, addToCart }) {
           className="absolute top-3 left-3"
           onClick={() => handleClick(null)}
         >
-          <FontAwesomeIcon icon={faCircleXmark} size="xl"></FontAwesomeIcon>
+          <FontAwesomeIcon
+            icon={faCircleXmark}
+            size="xl"
+            className="text-red-400 hover:text-red-600 transition-all"
+          ></FontAwesomeIcon>
         </div>
         <img
           className="w-1/2 h-3/4 object-contain border-2 rounded-lg"

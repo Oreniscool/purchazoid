@@ -1,4 +1,5 @@
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 import CartItems from '../components/CartItems';
 import CartTotal from '../components/CartTotal';
 import { useState, useEffect } from 'react';
@@ -22,6 +23,7 @@ function Cart() {
         <CartItems cart={cart} handleDelete={handleDelete}></CartItems>
         <CartTotal cart={cart}></CartTotal>
       </div>
+      <Footer></Footer>
     </>
   );
 }

@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import { Link } from 'react-router-dom';
-
+import Footer from '../components/Footer';
 const ErrorPage = () => {
   return (
     <div>
@@ -8,6 +8,7 @@ const ErrorPage = () => {
       <Link to="/">
         You can go back to the home page by clicking here, though!
       </Link>
+      <Footer></Footer>
     </div>
   );
 };
