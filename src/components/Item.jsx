@@ -1,8 +1,7 @@
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
-import { useEffect, useState } from 'react';
-
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import Amount from './Amount';
 function getTitle(title) {
   const max = 40;
   if (title.length > max) {
@@ -11,33 +10,6 @@ function getTitle(title) {
   return title;
 }
 
-function Amount({ itemInfo, changeAmount }) {
-  const [amount, setAmount] = useState(itemInfo.amount);
-  useEffect(() => {
-    changeAmount(itemInfo, amount);
-  }, [amount]);
-  return (
-    <div className="flex w-3/4 justify-between items-center">
-      <FontAwesomeIcon
-        icon={faMinus}
-        size="xs"
-        className="border-2 p-2 rounded-full hover:bg-gray-100"
-        onClick={() => {
-          if (amount > 1) setAmount((amount) => amount - 1);
-        }}
-      />
-      <div className="border-2 py-1 px-3 rounded-lg text-xl">{amount}</div>
-      <FontAwesomeIcon
-        icon={faPlus}
-        size="xs"
-        className="border-2 p-2 rounded-full hover:bg-gray-100"
-        onClick={() => {
-          if (amount < 10) setAmount((amount) => amount + 1);
-        }}
-      />
-    </div>
-  );
-}
 function Item({ itemInfo, handleClick, section, handleDelete, changeAmount }) {
   return (
     <div
@@ -75,4 +47,11 @@ function Item({ itemInfo, handleClick, section, handleDelete, changeAmount }) {
     </div>
   );
 }
+Item.propTypes = {
+  itemInfo: PropTypes.object,
+  handleClick: PropTypes.func,
+  section: PropTypes.string,
+  handleDelete: PropTypes.func,
+  changeAmount: PropTypes.func,
+};
 export default Item;

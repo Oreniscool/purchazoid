@@ -1,5 +1,4 @@
-/* eslint-disable react/prop-types */
-
+import PropTypes from 'prop-types';
 import Item from './Item';
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -28,4 +27,14 @@ function Category({ categoryName, items, handleClick }) {
     </div>
   );
 }
+
+Items.propTypes = {
+  items: PropTypes.object,
+  handleClick: PropTypes.func,
+};
+Category.propTypes = {
+  categoryName: PropTypes.string,
+  items: PropTypes.array,
+  handleClick: PropTypes.func,
+};
 export default Category;
