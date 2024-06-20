@@ -18,7 +18,6 @@ function Cart() {
     setCart((cart) => [...cart]);
   }
   useEffect(() => {
-    console.log(cart);
     window.sessionStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
   return (

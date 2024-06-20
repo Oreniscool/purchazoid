@@ -70,7 +70,6 @@ function ShopItems() {
 
   //Effect to update session storage on cart update
   useEffect(() => {
-    console.log(cart);
     window.sessionStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
 
