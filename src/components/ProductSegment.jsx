@@ -2,9 +2,12 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
-
+import Amount from './Amount';
 function Product({ itemInfo, handleClick, addToCart }) {
   const [amount, setAmount] = useState(1);
+  function changeAmount(item, newAmount) {
+    setAmount(newAmount);
+  }
   return (
     <div className="relative z-10">
       <div className="fixed h-screen w-screen bg-filter top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 "></div>
@@ -38,16 +41,7 @@ function Product({ itemInfo, handleClick, addToCart }) {
                 {' $' + itemInfo.price}
               </span>
             </h4>
-            <input
-              aria-label="Enter number of this item to add"
-              placeholder="Enter amount"
-              type="number"
-              value={amount}
-              onChange={(event) => setAmount(parseInt(event.target.value))}
-              min="1"
-              max="10"
-              className="border-2 w-1/2"
-            ></input>
+            <Amount itemInfo={{ amount }} changeAmount={changeAmount}></Amount>
             <button
               className="rounded bg-primary-600 p-2 hover:bg-secondary-500 transition-all text-white"
               onClick={() => addToCart(itemInfo, amount)}

@@ -1,6 +1,8 @@
 /* eslint-disable react/prop-types */
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { useEffect, useState } from 'react';
+
 function getTitle(title) {
   const max = 40;
   if (title.length > max) {
@@ -8,10 +10,38 @@ function getTitle(title) {
   }
   return title;
 }
-function Item({ itemInfo, handleClick, section, handleDelete }) {
+
+function Amount({ itemInfo, changeAmount }) {
+  const [amount, setAmount] = useState(itemInfo.amount);
+  useEffect(() => {
+    changeAmount(itemInfo, amount);
+  }, [amount]);
+  return (
+    <div className="flex w-3/4 justify-between items-center">
+      <FontAwesomeIcon
+        icon={faMinus}
+        size="xs"
+        className="border-2 p-2 rounded-full hover:bg-gray-100"
+        onClick={() => {
+          if (amount > 1) setAmount((amount) => amount - 1);
+        }}
+      />
+      <div className="border-2 py-1 px-3 rounded-lg text-xl">{amount}</div>
+      <FontAwesomeIcon
+        icon={faPlus}
+        size="xs"
+        className="border-2 p-2 rounded-full hover:bg-gray-100"
+        onClick={() => {
+          if (amount < 10) setAmount((amount) => amount + 1);
+        }}
+      />
+    </div>
+  );
+}
+function Item({ itemInfo, handleClick, section, handleDelete, changeAmount }) {
   return (
     <div
-      className="group flex flex-col justify-between items-center bg-white rounded overflow-hidden shadow-lg p-5  transition-all hover:shadow-xl px-10 hover:scale-105 z-0 cursor-pointer"
+      className="group flex flex-col justify-between items-center bg-white rounded overflow-hidden shadow-lg p-5  transition-all hover:shadow-xl px-10 hover:scale-105 z-0 cursor-pointer gap-2"
       onClick={() => {
         handleClick(itemInfo);
       }}
@@ -23,7 +53,11 @@ function Item({ itemInfo, handleClick, section, handleDelete }) {
       <p className="group-hover:text-secondary-300 transition-all cursor-pointer">
         {'$' + itemInfo.price}
       </p>
-      {section == 'shop' ? '' : <h4>Amount:{itemInfo.amount}</h4>}
+      {section == 'shop' ? (
+        ''
+      ) : (
+        <Amount itemInfo={itemInfo} changeAmount={changeAmount}></Amount>
+      )}
       <div>
         {section == 'shop' ? (
           <button className="rounded bg-primary-600 p-2 hover:bg-secondary-500 transition-all text-white">

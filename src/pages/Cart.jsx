@@ -12,6 +12,11 @@ function Cart() {
   function handleDelete(item) {
     setCart((cart) => cart.filter((element) => element.id !== item.id));
   }
+  function changeAmount(item, amount) {
+    let element = cart.find((ele) => ele.id == item.id);
+    element.amount = amount;
+    setCart((cart) => [...cart]);
+  }
   useEffect(() => {
     console.log(cart);
     window.sessionStorage.setItem('cart', JSON.stringify(cart));
@@ -20,7 +25,11 @@ function Cart() {
     <>
       <Navbar></Navbar>
       <div className="flex flex-row m-16 h-full gap-10">
-        <CartItems cart={cart} handleDelete={handleDelete}></CartItems>
+        <CartItems
+          cart={cart}
+          handleDelete={handleDelete}
+          changeAmount={changeAmount}
+        ></CartItems>
         <CartTotal cart={cart}></CartTotal>
       </div>
       <Footer></Footer>
