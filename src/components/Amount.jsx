@@ -17,7 +17,9 @@ function Amount({ itemInfo, changeAmount }) {
           if (amount > 1) setAmount((amount) => amount - 1);
         }}
       />
-      <div className="border-2 py-1 px-3 rounded-lg text-xl">{amount}</div>
+      <div className="border-2 py-1 px-3 rounded-lg text-xl select-none">
+        {amount}
+      </div>
       <FontAwesomeIcon
         icon={faPlus}
         size="xs"

@@ -15,7 +15,10 @@ function Navbar() {
       : 'hover:underline hover:bg-background-700 p-1 rounded-lg decoration-2 px-2 transition-all';
   };
   return (
-    <nav className="flex w-100 justify-center text-lg py-2 gap-16 border-solid border-b-2 fixed left-0 top-0 w-full bg-background-900 z-10">
+    <nav className="flex w-100 justify-center text-lg py-2 gap-16 border-solid border-b-2 fixed left-0 top-0 w-full bg-background-900 z-10 relative">
+      <h1 className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent text-2xl font-semibold absolute top-1/5 left-10">
+        Purchazoid
+      </h1>
       <Link to="/" className={decideClass('/')}>
         <FontAwesomeIcon icon={faHouse} />
       </Link>
